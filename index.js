@@ -12,7 +12,12 @@ const PORT = process.env.PORT || 5000;
 const YT_DLP_PATH = path.resolve(__dirname, 'bin', 'yt-dlp');
 
 // Middleware
-app.use(cors());
+// Middleware
+app.use(cors({
+    origin: '*', // Allow all origins (Vercel, Localhost, etc.)
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
+}));
 app.use(express.json());
 
 // Health Check
