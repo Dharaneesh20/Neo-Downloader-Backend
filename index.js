@@ -20,6 +20,10 @@ app.get('/', (req, res) => {
     res.send('Video Downloader API is running...');
 });
 
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'active', time: new Date().toISOString(), server: 'NeoDownloader v1.0' });
+});
+
 // Helper to spawn yt-dlp and get JSON output
 const getVideoInfo = (url) => {
     return new Promise((resolve, reject) => {
