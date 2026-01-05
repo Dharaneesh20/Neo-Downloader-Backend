@@ -1,5 +1,5 @@
-# Use Node.js 18 as base
-FROM node:18-bullseye-slim
+# Use Node.js 20 (Bookworm) for newer Python
+FROM node:20-bookworm-slim
 
 # Install Python, FFmpeg, and Curl
 RUN apt-get update && \
