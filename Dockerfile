@@ -19,10 +19,10 @@ COPY . .
 
 # Ensure binaries have execution permissions (if committed)
 # But we will likely download fresh yt-dlp anyway or use the one in repo
-RUN chmod +x server/bin/yt-dlp || true
+RUN chmod +x bin/yt-dlp || true
 
 # Expose port
 EXPOSE 5000
 
 # Start server
-CMD ["node", "server/index.js"]
+CMD ["node", "index.js"]
