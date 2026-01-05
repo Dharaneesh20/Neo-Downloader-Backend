@@ -161,6 +161,28 @@ app.get('/api/download', async (req, res) => {
     }
 });
 
+// Update yt-dlp binary
+app.post('/api/update', async (req, res) => {
+    try {
+        console.log('Starting yt-dlp update...');
+        const process = spawn(YT_DLP_PATH, ['-U']);
+
+        let output = '';
+        process.stdout.on('data', (data) => { output += data.toString(); });
+        process.stderr.on('data', (data) => { output += data.toString(); });
+
+        process.on('close', (code) => {
+            if (code === 0) {
+                res.json({ success: true, message: 'Update successful', output });
+            } else {
+                res.status(500).json({ success: false, message: 'Update failed', output });
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error', details: error.message });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
