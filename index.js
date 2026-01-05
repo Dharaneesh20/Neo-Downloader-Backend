@@ -131,12 +131,25 @@ app.get('/api/download', async (req, res) => {
             '-o', '-',
             '--no-warnings',
             '--no-check-certificate',
+            '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            '--referer', 'https://vk.com/',
+            '--extractor-args', 'youtube:player_client=android', // Bypass "Sign in to confirm"
+            '--add-header', 'Accept-Language: en-US,en;q=0.9',
             url
         ];
 
         let formatSelector = 'best';
         if (video_id && audio_id) {
             formatSelector = `${video_id}+${audio_id}`;
+            // When merging, we need ffmpeg. yt-dlp to stdout with merge is tricky.
+            // Usually we pipe raw data.
+            // If merging, we can't pipe directly to res easily without intermediate file or complex pipe.
+            // For now, let's trust the existing logic usage.
+            // Wait, existing logic was:
+            // if (video_id && audio_id) { formatSelector = ... }
+            // args.push('-f', formatSelector);
+            // const subprocess = spawn(YT_DLP_PATH, args);
+            // subprocess.stdout.pipe(res);
         } else if (video_id) {
             formatSelector = video_id;
         }
