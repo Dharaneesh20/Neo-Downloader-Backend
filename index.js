@@ -36,9 +36,8 @@ const getVideoInfo = (url) => {
             '--dump-single-json',
             '--no-warnings',
             '--no-check-certificate',
-            '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-            '--referer', 'https://vk.com/',
-            '--extractor-args', 'youtube:player_client=android', // Added to bypass "Sign in to confirm"
+            '--user-agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_8 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.2 Mobile/15E148 Safari/604.1',
+            '--extractor-args', 'youtube:player_client=ios', // Try iOS client
             '--add-header', 'Accept-Language: en-US,en;q=0.9',
             url
         ];
@@ -131,9 +130,8 @@ app.get('/api/download', async (req, res) => {
             '-o', '-',
             '--no-warnings',
             '--no-check-certificate',
-            '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-            '--referer', 'https://vk.com/',
-            '--extractor-args', 'youtube:player_client=android', // Bypass "Sign in to confirm"
+            '--user-agent', 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_8 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.2 Mobile/15E148 Safari/604.1',
+            '--extractor-args', 'youtube:player_client=ios',
             '--add-header', 'Accept-Language: en-US,en;q=0.9',
             url
         ];
